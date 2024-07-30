@@ -5,25 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StorylistComponent } from './storylist/storylist.component';
 import { provideHttpClient } from '@angular/common/http';
-import {HttpService}  from './services/http.service'
+import { HttpService }  from './services/http.service'
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    StorylistComponent
+    StorylistComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    
+    
   ],
   providers: [
     HttpService,
- 
-    provideHttpClient()
+    provideHttpClient(),
+    
   ],
   bootstrap: [AppComponent]
 })
