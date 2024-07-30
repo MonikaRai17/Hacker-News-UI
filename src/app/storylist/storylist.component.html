@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row" style="margin:10px">
+        <div class="col-sm-6">
+            <input type="text" class="form-control" [(ngModel)]="searchItem" placeholder="Search from here" (keyup)="filter()">
+        </div>
+    </div>
+    
+   
+    <div class="card hover-overlay  border-secondary"  *ngFor="let story of storylist  | paginate
+                                                                                            : {
+                                                                                                itemsPerPage: tableSize,
+                                                                                                currentPage: page,
+                                                                                                totalItems: count
+                                                                                            };
+                                                                                        let i = index">
+       <a  href="{{story.url}}" target="_blank" style="text-decoration: none;">
+        <div class="card-header text-bg-secondary">
+            {{story.title}}
+          </div>
+      
+       
+    </a>
+      </div>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </div>
+   
+</div>
+
+
+
+
+ 
