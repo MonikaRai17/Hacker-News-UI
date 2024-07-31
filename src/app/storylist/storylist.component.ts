@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../services/http.service';
-import { catchError, retry, throwError } from 'rxjs';
+import { HackerNewsService } from '../services/HackerNews.service';
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-storylist',
@@ -15,7 +15,7 @@ export class StorylistComponent implements OnInit {
   count: number = 0;
   tableSize: number = 10;
   
-  constructor(private httpservice : HttpService){
+  constructor(private service : HackerNewsService, private loader: LoaderService){
 
   }
 
@@ -25,7 +25,9 @@ export class StorylistComponent implements OnInit {
 
   getStory()
   {
-    this.httpservice.getStories(this.searchItem)
+    this.storylist = [];
+    this.loader.showSpinner();
+    this.service.getStories(this.searchItem)
     .subscribe((data:any) => 
     {
       this.storylist = data;
@@ -34,18 +36,13 @@ export class StorylistComponent implements OnInit {
 
   filter()
   {
-    if(this.searchItem.length>=3)
-    {
-      this.getStory();
-    }
-    else if(this.searchItem.length == 0)
-      {
-        this.getStory();
-      }
+    this.page = 1;
+    this.getStory();
    
   }
 
   onTableDataChange(event: any) {
+    
     this.page = event;
     this.getStory();
   }
